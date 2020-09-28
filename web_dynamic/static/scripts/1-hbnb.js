@@ -1,7 +1,7 @@
 const myListId = [];
 const myListName = [];
 $(document).ready(function () {
-  $('input[type=checkbox]').click(function () {
+  $('input[type=checkbox]').change(function () {
     if ($(this).prop('checked') === true) {
       myListId.push($(this).attr('data-id'));
       console.log(myListId);
@@ -21,7 +21,8 @@ $(document).ready(function () {
       $('.amenities h4').html('&nbsp');
     } else {
       $('.amenities h4').text(myListName.join(', '));
+      $('.amenities h4').append('...');
     }
-    $('.amenities h4').append('...');
+
   });
 });
