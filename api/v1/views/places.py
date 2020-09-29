@@ -134,7 +134,7 @@ def places_search():
         states = data.get('states', None)
         cities = data.get('cities', None)
         amenities = data.get('amenities', None)
-
+    """ If the JSON in the POST request is empty or each key is empty """
     if not data or not len(data) or (
             not states and
             not cities and
@@ -162,15 +162,15 @@ def places_search():
                 for place in city.places:
                     if place not in list_places:
                         list_places.append(place)
-
+    # This is the method for the task 5 AirBnb_v4.
     if amenities:
         if not list_places:
             list_places = storage.all(Place).values()
+        # Below the amenities objects are brought from the ids sent in the POST
         amenities_obj = [storage.get(Amenity, a_id) for a_id in amenities]
         list_places = [place for place in list_places
-                       if all([am in place.amenities
-                               for am in amenities_obj])]
-
+                       if all([am in place.amenities for am in amenities_obj])]
+        # Above, list places has all places that have all the amenities
     places = []
     for p in list_places:
         d = p.to_dict()
